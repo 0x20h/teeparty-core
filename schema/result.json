@@ -22,5 +22,5 @@
 			}
 		}
 	},
-	"required": ["id", "returnValue"]
+	"required": ["id", "start_date", "returnValue"]
 }
