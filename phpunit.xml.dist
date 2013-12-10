@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="php/tests/bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="Teeparty Schema Test Suite">
+            <directory>php/tests/Teeparty/</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">php/src/Teeparty/</directory>
+        </whitelist>
+    </filter>
+</phpunit>
+
+
