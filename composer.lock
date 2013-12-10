@@ -3,20 +3,20 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "b6aaf44e69d3e907e0afee91ab99a0a4",
+    "hash": "4117a9af4e976f4f0a76806d78cc5b03",
     "packages": [
         {
             "name": "justinrainbow/json-schema",
-            "version": "1.3.3",
+            "version": "1.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/justinrainbow/json-schema.git",
-                "reference": "56fe099669ff3ec3be859ec02e3da965a720184d"
+                "reference": "ad8b959e5962624004738d50a2d8e83c5668e143"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/56fe099669ff3ec3be859ec02e3da965a720184d",
-                "reference": "56fe099669ff3ec3be859ec02e3da965a720184d",
+                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/ad8b959e5962624004738d50a2d8e83c5668e143",
+                "reference": "ad8b959e5962624004738d50a2d8e83c5668e143",
                 "shasum": ""
             },
             "require": {
@@ -24,7 +24,8 @@
             },
             "require-dev": {
                 "json-schema/json-schema-test-suite": "1.1.0",
-                "phpunit/phpunit": "~3.7.0"
+                "phpdocumentor/phpdocumentor": "~2",
+                "phpunit/phpunit": "~3.7"
             },
             "bin": [
                 "bin/validate-json"
@@ -70,7 +71,7 @@
                 "json",
                 "schema"
             ],
-            "time": "2013-07-22 15:15:25"
+            "time": "2013-12-08 21:17:57"
         }
     ],
     "packages-dev": [
@@ -443,17 +444,17 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.3.7",
+            "version": "v2.4.0",
             "target-dir": "Symfony/Component/Yaml",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "c1bda5b459d792cb253de12c65beba3040163b2b"
+                "reference": "1ae235a1b9d3ad3d9f3860ff20acc072df95b7f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/c1bda5b459d792cb253de12c65beba3040163b2b",
-                "reference": "c1bda5b459d792cb253de12c65beba3040163b2b",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/1ae235a1b9d3ad3d9f3860ff20acc072df95b7f5",
+                "reference": "1ae235a1b9d3ad3d9f3860ff20acc072df95b7f5",
                 "shasum": ""
             },
             "require": {
@@ -462,7 +463,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -486,7 +487,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2013-10-17 11:48:01"
+            "time": "2013-11-26 16:40:27"
         }
     ],
     "aliases": [
