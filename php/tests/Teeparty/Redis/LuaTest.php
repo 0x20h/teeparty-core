@@ -46,4 +46,15 @@ Class LuaTest extends \PHPUnit_Framework_TestCase {
         $this->assertNotNull($lua->getSHA1('task/ack'));
     }
 
+
+    public function testGetScripts()
+    {
+        $lua = new Lua;
+        $scripts = $lua->getScripts();
+        $this->assertNotEmpty($scripts);
+        $this->assertTrue(array_key_exists('task/put', $scripts));
+
+        $lua = new Lua('/non-existant/foo/bar');
+        $this->assertEquals(array(), $lua->getScripts());
+    }
 }

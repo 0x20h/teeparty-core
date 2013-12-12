@@ -37,6 +37,15 @@ class Lua {
 
     private $scripts = array();
     private $sha1 = array();
+    private $baseDir = null;
+
+    public function __construct($baseDir = null)
+    {
+        $this->baseDir = $baseDir 
+            ? $baseDir 
+            : realpath(__DIR__ . '/../../../../' . '/redis/');
+    }
+
 
     /**
      * Return the script source for the given script.
@@ -52,8 +61,7 @@ class Lua {
         }
         
         if (!isset($this->scripts[$script])) { 
-            $file = realpath(__DIR__ . '/../../../../' . '/redis/' . 
-                $script . '.lua');
+            $file = realpath($this->baseDir . '/' . $script . '.lua');
             
             if (!is_readable($file)) {
                 return null;
@@ -70,6 +78,9 @@ class Lua {
     /**
      * Return the SHA1 hash of the given script.
      *
+     * The SHA1 value is used in combination with the evalSHA command from 
+     * redis in order to trigger the server side cached script.
+     *
      * @param string $script The script name.
      * @return string SHA1 hash of the script. null if script was not found.
      */
@@ -85,5 +96,44 @@ class Lua {
         }
         
         return $this->sha1[$script];
+    }
+
+
+    /**
+     * Retrieve all available lua scripts relative from baseDir.
+     *
+     * @return string[] dict with script names as keys, source as value.
+     */
+    public function getScripts() {
+        try {
+            $iterator = new \RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator($this->baseDir),
+                \RecursiveIteratorIterator::CHILD_FIRST
+            );
+        } catch (\UnexpectedValueException $e) {
+            // dir not found
+            return array();
+        }
+
+        while ($iterator->valid()) {
+            $element = $iterator->current();
+            $iterator->next();
+
+            $filename = $element->getPathname();
+
+            if (strpos($filename, '.lua') !== strlen($filename) - 4) {
+                continue;
+            }
+
+            $scriptName = substr($filename, strlen($this->baseDir . '/'), -4);
+
+            if (isset($this->scripts[$scriptName])) {
+                continue;
+            }
+
+            $this->scripts[$scriptName] = file_get_contents($filename);
+        }
+
+        return $this->scripts;
     }
 }
