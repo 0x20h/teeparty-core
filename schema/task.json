@@ -4,17 +4,23 @@
 	"description": "...",
 	"type": "object",
 	"properties": {
-		"id": { 
+		"id": {
 			"type": "string",
-			"pattern": "^[0-9a-f]+$" 
+			"pattern": "^[0-9a-f]+$"
 		},
-		"job": { "type" : "string" },
+		"job": {
+			"type" : "string"
+		},
 		"context": {
 			"oneof": {
 				"type": "array",
 				"type": "object"
 			}
+		},
+		"created": {
+			"type": "string",
+			"format": "date-time"
 		}
 	},
-	"required": ["id", "job"]
+	"required": ["id", "job", "created"]
 }
