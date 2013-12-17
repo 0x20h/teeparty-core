@@ -14,7 +14,7 @@ class Validator {
      * Validate schema against the given JSON string.
      *
      * @param string $schema The schema to use.
-     * @param string $data JSON string to validate.
+     * @param mixed $data JSON decoded object to validate.
      *
      * @return bool True, if data validates. False otherwise.
      */
@@ -49,6 +49,21 @@ class Validator {
             throw new Exception($e);
         }
     }
+
+
+    /**
+     * Validate the given JSON string against the schema.
+     *
+     * @param string $schema The schema to validate.
+     * @param string $json A JSON string.
+     *
+     * @return bool True, if validation is successful. False otherwise.
+     */
+    public function validateJSON($schema, $json)
+    {
+        return $this->validate($schema, json_decode($json));
+    }
+
 
     /**
      * @return array errors from last validation.

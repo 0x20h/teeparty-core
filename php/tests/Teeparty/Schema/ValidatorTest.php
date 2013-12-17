@@ -62,7 +62,7 @@ Class ValidatorTest extends \PHPUnit_Framework_TestCase {
     public function testSchemaTask()
     {
         $validator = new Validator;
-        $data = $this->getValidData();
+        $data = json_decode($this->getValidData());
         $this->assertEquals(array(), $validator->getLastErrors());
         $this->assertTrue($validator->validate('task', $data));
         $this->assertEquals(array(), $validator->getLastErrors());
@@ -76,7 +76,7 @@ Class ValidatorTest extends \PHPUnit_Framework_TestCase {
     public function testSchemaContext()
     {
         $validator = new Validator;
-        $data = $this->getValidData();
+        $data = json_decode($this->getValidData());
         $this->assertEquals(array(), $validator->getLastErrors());
         $this->assertTrue($validator->validate('task', $data));
         $this->assertEquals(array(), $validator->getLastErrors());
@@ -89,11 +89,21 @@ Class ValidatorTest extends \PHPUnit_Framework_TestCase {
             $validator->getLastErrors()
         );
     }
+
+
+    public function testValidateJSON()
+    {
+        $validator = new Validator;
+        $json = $this->getValidData();
+        $this->assertTrue($validator->validateJSON('task', $json));
+    }
    
     public function getValidData() {
-        return json_decode('{
+        $date = new \DateTime();
+        return '{
             "id": "33abef",
-            "job": "Foo"
-        }');
+            "job": "Foo",
+            "created": "' .$date->format(\DateTime::ATOM).'"
+        }';
     }
 }
