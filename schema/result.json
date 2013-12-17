@@ -13,7 +13,7 @@
 		},
 		"start_date": {
 			"type": "string",
-			"format": "date"
+			"format": "date-time"
 		},
 		"returnValue": { 
 			"oneof": {
@@ -23,7 +23,7 @@
 		},
 		"created": {
 			"type": "string",
-			"format": "date"
+			"format": "date-time"
 		}
 	},
 	"required": ["id", "start_date", "returnValue", "created"]
