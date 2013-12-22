@@ -4,12 +4,15 @@ store task results.
 KEYS: 
  - result key
  - task key
+ - pending set key
+ - finished set key
 
-ARGS:
+ ARGS:
  - json encoded task result
 ]]--
 
-local result_key, task_key, result = KEYS[1], KEYS[2], ARGV[1]
+local result_key, task_key, pending_set_key, finished_set_key, result = 
+	KEYS[1], KEYS[2], KEYS[3], KEYS[4], ARGV[1]
 
 local tries = redis.call('hget', task_key, 'tries')
 redis.call('hset', result_key, tries, result)

@@ -1,14 +1,17 @@
 --[[
-Pop a pending item from one of the requsted channels, increase the number
+Pop a pending item from one of the requested channels, increase the number
 of tries and register the item for the given worker.
 
 KEYS: 
- - the channels (1..N-1)
+ - the channels (1..N-3)
+ - pending set key (N-2)
+ - processing set key (N-1)
  - worker_key (N)
 ]]--
 
 -- retrieve & remove worker_key from KEYS
-local worker_key = table.remove(KEYS)
+local worker_key, pending_set_key, processing_set_key = 
+	table.remove(KEYS), table.remove(KEYS), table.remove(KEYS)
 
 for i, channel in ipairs(KEYS) do
     local task_key = redis.call('rpop', KEYS[i])
