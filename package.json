@@ -1,0 +1,21 @@
+{
+	"private": true,
+  "name": "teeparty-schema",
+  "description": "Teeparty schema files and common scripts",
+  "version": "0.0.1",
+  "author": {
+    "name": "Jan Kohlhof",
+    "email": "kohj@informatik.uni-marburg.de"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://knotter@kohlhof-webservices:664/~/dev/teeparty-schema.git"
+  },
+  "keywords": ["json", "schema", "redis", "lua"],
+  "dependencies": {
+    "jsonschema": "~0.4"
+  },
+  "engines": {
+    "node": ">= 0.8.x"
+  }
+}
