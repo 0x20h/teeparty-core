@@ -20,11 +20,7 @@
 				"type": "array",
 				"type": "object"
 			}
-		},
-		"created": {
-			"type": "string",
-			"format": "date-time"
 		}
 	},
-	"required": ["id", "start_date", "returnValue", "created"]
+	"required": ["id", "start_date", "returnValue"]
 }
