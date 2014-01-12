@@ -4,10 +4,6 @@
 	"description": "...",
 	"type": "object",
 	"properties": {
-		"id": {
-			"type": "string",
-			"pattern": "^[0-9a-f]+$"
-		},
 		"job": {
 			"type" : "string"
 		},
@@ -17,10 +13,20 @@
 				"type": "object"
 			}
 		},
-		"created": {
-			"type": "string",
-			"format": "date-time"
+		"meta": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string",
+					"pattern": "^[0-9a-f]+$"
+				},
+				"created": {
+					"type": "string",
+					"format": "date-time"
+				}
+			},
+			"required": ["id", "created"]
 		}
 	},
-	"required": ["id", "job", "created"]
+	"required": ["job"]
 }
