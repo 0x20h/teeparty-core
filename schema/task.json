@@ -1,32 +1,32 @@
 {
-	"$schema": "http://json-schema.org/draft-04/schema#",
-	"title": "task schema",
-	"description": "...",
-	"type": "object",
-	"properties": {
-		"job": {
-			"type" : "string"
-		},
-		"context": {
-			"oneof": {
-				"type": "array",
-				"type": "object"
-			}
-		},
-		"meta": {
-			"type": "object",
-			"properties": {
-				"id": {
-					"type": "string",
-					"pattern": "^[0-9a-f]+$"
-				},
-				"created": {
-					"type": "string",
-					"format": "date-time"
-				}
-			},
-			"required": ["id", "created"]
-		}
-	},
-	"required": ["job"]
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "task schema",
+  "description": "...",
+  "type": "object",
+  "properties": {
+    "job": {
+      "type" : "string"
+    },
+    "context": {
+      "oneof": {
+        "type": "array",
+        "type": "object"
+      }
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]+$"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "created"]
+    }
+  },
+  "required": ["job"]
 }

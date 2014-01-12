@@ -12,7 +12,7 @@ ARGS:
 ]]--
 
 local channel, task_key, pending_set_key, task, schedule =
-	KEYS[1], KEYS[2], KEYS[3], ARGV[1], ARGV[2]
+  KEYS[1], KEYS[2], KEYS[3], ARGV[1], ARGV[2]
 
 -- store task
 redis.call('hmset', task_key, 'task', task, 'channel', channel)

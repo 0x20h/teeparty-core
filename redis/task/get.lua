@@ -11,7 +11,7 @@ KEYS:
 
 -- retrieve & remove worker_key from KEYS
 local worker_key, pending_set_key, processing_set_key = 
-	table.remove(KEYS), table.remove(KEYS), table.remove(KEYS)
+  table.remove(KEYS), table.remove(KEYS), table.remove(KEYS)
 
 for i, channel in ipairs(KEYS) do
     local task_key = redis.call('rpop', KEYS[i])
@@ -27,7 +27,7 @@ for i, channel in ipairs(KEYS) do
         redis.call('hmset', worker_key, 'current_task', task_key)
 
         return task
-	end
+  end
 end
 
 return 0

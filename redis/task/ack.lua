@@ -12,7 +12,7 @@ KEYS:
 ]]--
 
 local result_key, task_key, pending_set_key, finished_set_key, result = 
-	KEYS[1], KEYS[2], KEYS[3], KEYS[4], ARGV[1]
+  KEYS[1], KEYS[2], KEYS[3], KEYS[4], ARGV[1]
 
 local tries = redis.call('hget', task_key, 'tries')
 redis.call('hset', result_key, tries, result)
