@@ -1,7 +1,7 @@
 {
 	"private": true,
-  "name": "teeparty-schema",
-  "description": "Teeparty schema files and common scripts",
+  "name": "teeparty-core",
+  "description": "Teeparty schema files and lua scripts",
   "version": "0.0.1",
   "author": {
     "name": "Jan Kohlhof",
