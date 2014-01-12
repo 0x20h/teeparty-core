@@ -1,5 +1,5 @@
 --[[
-Push a task to the requsted channel and register
+Push a task to the requested channel and register
 the task.
 
 KEYS: 
