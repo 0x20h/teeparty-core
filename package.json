@@ -1,5 +1,5 @@
 {
-	"private": true,
+  "private": true,
   "name": "teeparty-core",
   "description": "Teeparty schema files and lua scripts",
   "version": "0.0.1",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://knotter@kohlhof-webservices:664/~/dev/teeparty-schema.git"
+    "url": "https://github.com/0x20h/teeparty-core.git"
   },
   "keywords": ["json", "schema", "redis", "lua"],
   "dependencies": {
