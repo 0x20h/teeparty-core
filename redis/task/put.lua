@@ -3,19 +3,21 @@ Push a task to the requested channel and register
 the task.
 
 KEYS: 
-    - the channel
-    - task key.
-    - pending set key
+
 ARGS: 
+    - key prefix
+    - the channel
+    - task id.
     - json-encoded task.
-    - json-encoded schedule.
 ]]--
 
-local channel, task_key, pending_set_key, task, schedule =
-  KEYS[1], KEYS[2], KEYS[3], ARGV[1], ARGV[2]
+local prefix, channel, task_id, task = 
+    ARGV[1], ARGV[2], ARGV[3], ARGV[4]
+
+local task_key = prefix .. 'task.' .. task_id
 
 -- store task
 redis.call('hmset', task_key, 'task', task, 'channel', channel)
 -- push task to channel
-redis.call('lpush', channel, task_key)
+redis.call('lpush', prefix .. 'channel.' .. channel, task_id)
 return 1

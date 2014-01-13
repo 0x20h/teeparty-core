@@ -1,33 +1,33 @@
 --[[
-Pop a pending item from one of the requested channels, increase the number
+Pop a pending item from the requested channel, increase the number
 of tries and register the item for the given worker.
 
 KEYS: 
- - the channels (1..N-3)
- - pending set key (N-2)
- - processing set key (N-1)
- - worker_key (N)
+ - key prefix
+ - the channel
+ - worker_id
 ]]--
 
--- retrieve & remove worker_key from KEYS
-local worker_key, pending_set_key, processing_set_key = 
-  table.remove(KEYS), table.remove(KEYS), table.remove(KEYS)
+local prefix, channel, worker_id = ARGV[1], ARGV[2], ARGV[3]
+local task_id = redis.call('rpop', prefix .. 'channel.' .. channel)
 
-for i, channel in ipairs(KEYS) do
-    local task_key = redis.call('rpop', KEYS[i])
+if task_id then
+    local task_key = prefix .. 'task.' .. task_id
+    local worker_key = prefix .. 'worker.' .. worker_id
+    
+    -- load task 
+    local json = redis.call('hget', task_key, 'task')
+    local task = cjson.decode(json)
 
-    if task_key then
-        -- increase tries
-        redis.call('hincrby', task_key, 'tries', 1)
-        
-        -- load task 
-        local task = redis.call('hget', task_key, 'task')
+    -- increase tries / update task
+    task.meta.tries = tonumber(task.meta.tries or "0") + 1
+    json = cjson.encode(task)
+    redis.call('hset', task_key, 'task', json)
+    
+    -- register that worker processes task
+    redis.call('hmset', worker_key, 'current_task', task_id)
 
-        -- register that worker_key processes task
-        redis.call('hmset', worker_key, 'current_task', task_key)
-
-        return task
-  end
+    return json
 end
 
 return 0
