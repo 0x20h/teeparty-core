@@ -23,9 +23,15 @@
         "created": {
           "type": "string",
           "format": "date-time"
+        },
+        "max_tries": {
+          "type": "number"
+        },
+        "tries": {
+          "type": "number"
         }
       },
-      "required": ["id", "created"]
+      "required": ["id", "created", "max_tries", "tries"]
     }
   },
   "required": ["job"]

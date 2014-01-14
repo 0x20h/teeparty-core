@@ -4,7 +4,7 @@
   "description": "...",
   "type": "object",
   "properties": {
-    "id": { 
+    "task_id": { 
       "type": "string",
       "pattern": "^[0-9a-f]+$" 
     },
@@ -16,11 +16,14 @@
       "format": "date-time"
     },
     "returnValue": { 
-      "oneof": {
-        "type": "array",
-        "type": "object"
-      }
+      "oneof": [
+        { "type": "array" },
+        { "type": "object" }
+      ]
+    },
+    "status": {
+      "enum": ["ok", "failed", "exception"]
     }
   },
-  "required": ["id", "start_date", "returnValue"]
+  "required": ["task_id", "start_date", "returnValue"]
 }
