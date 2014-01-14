@@ -36,8 +36,8 @@ Class ValidatorTest extends \PHPUnit_Framework_TestCase {
     {
         $validator = new Validator;
         $validator->validate(false, array());
-
     }
+
 
     /**
      * @expectedException Teeparty\Schema\Exception
@@ -48,7 +48,8 @@ Class ValidatorTest extends \PHPUnit_Framework_TestCase {
         $validator = new Validator;
         $validator->validate(array(), array());
     }
- 
+
+
     /**
      * @expectedException Teeparty\Schema\Exception
      * @expectedExceptionMessage Invalid schema
@@ -58,11 +59,12 @@ Class ValidatorTest extends \PHPUnit_Framework_TestCase {
         $validator = new Validator;
         $validator->validate('non-existant', array());
     }
-   
+
+
     public function testSchemaTask()
     {
         $validator = new Validator;
-        $data = json_decode($this->getValidData());
+        $data = json_decode($this->getValidTask());
         $this->assertEquals(array(), $validator->getLastErrors());
         $this->assertTrue($validator->validate('task', $data));
         $this->assertEquals(array(), $validator->getLastErrors());
@@ -73,10 +75,11 @@ Class ValidatorTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($validator->validate('task', $data));
     }
 
+
     public function testSchemaContext()
     {
         $validator = new Validator;
-        $data = json_decode($this->getValidData());
+        $data = json_decode($this->getValidTask());
         $this->assertEquals(array(), $validator->getLastErrors());
         $this->assertTrue($validator->validate('task', $data));
         $this->assertEquals(array(), $validator->getLastErrors());
@@ -94,16 +97,22 @@ Class ValidatorTest extends \PHPUnit_Framework_TestCase {
     public function testValidateJSON()
     {
         $validator = new Validator;
-        $json = $this->getValidData();
+        $json = $this->getValidTask();
         $this->assertTrue($validator->validateJSON('task', $json));
     }
    
-    public function getValidData() {
+    public function getValidTask()
+    {
         $date = new \DateTime();
         return '{
-            "id": "33abef",
             "job": "Foo",
-            "created": "' .$date->format(\DateTime::ATOM).'"
+            "context": [],
+            "meta": {
+                "id": "33abef",
+                "tries": 0,
+                "created": "' .$date->format(\DateTime::ATOM).'",
+                "max_tries": 1
+            }
         }';
     }
 }
