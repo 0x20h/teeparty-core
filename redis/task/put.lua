@@ -19,12 +19,12 @@ local task_key = prefix .. 'task.' .. task_id
 
 -- store task
 redis.call('hmset', task_key, 'task', task, 'channel', channel)
-if execution_time then
-    -- schedule task for later execution
-    redis.call('zadd', prefix .. 'scheduler', execution_time, task_id)
-else
+if tonumber(execution_time) == nil then
     -- push task to channel for ASAP execution
     redis.call('lpush', prefix .. 'channel.' .. channel, task_id)
+else
+    -- schedule task for later execution
+    redis.call('zadd', prefix .. 'scheduler', tonumber(execution_time), task_id)
 end
 
 return 1
