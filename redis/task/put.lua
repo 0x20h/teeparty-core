@@ -9,7 +9,7 @@ ARGS:
     - the channel
     - task id.
     - json-encoded task.
-    - execution time (OPTIONAL)
+    - execution time as unix timestamp (OPTIONAL)
 ]]--
 
 local prefix, channel, task_id, task, execution_time =
