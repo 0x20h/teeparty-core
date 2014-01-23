@@ -6,9 +6,10 @@ KEYS:
  - key prefix
  - the channel
  - worker_id
+ - now (unix_timestamp)
 ]]--
 
-local prefix, channel, worker_id = ARGV[1], ARGV[2], ARGV[3]
+local prefix, channel, worker_id, now = ARGV[1], ARGV[2], ARGV[3], ARGV[4]
 local task_id = redis.call('rpop', prefix .. 'channel.' .. channel)
 
 if task_id then
@@ -25,7 +26,11 @@ if task_id then
     redis.call('hset', task_key, 'task', json)
     
     -- register that worker processes task
-    redis.call('hmset', worker_key, 'current_task', task_id)
+    redis.call(
+        'hmset', worker_key,
+        'current_task', task_id,
+        'current_task_start', now
+    )
 
     return json
 end
