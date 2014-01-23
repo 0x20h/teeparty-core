@@ -22,7 +22,7 @@
       ]
     },
     "status": {
-      "enum": ["ok", "failed", "exception"]
+      "enum": ["ok", "failed", "exception", "fatal"]
     }
   },
   "required": ["task_id", "start_date", "returnValue"]
