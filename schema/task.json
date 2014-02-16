@@ -34,5 +34,5 @@
       "required": ["id", "created", "max_tries", "tries"]
     }
   },
-  "required": ["job"]
+  "required": ["job", "meta"]
 }
