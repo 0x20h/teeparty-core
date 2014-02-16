@@ -24,6 +24,8 @@ redis.call('hdel', worker_key, 'current_task')
 
 -- notify (possible listening) parties
 -- @TODO reconsider if clients should just poll. Not sure for now but
--- a blocking variant seems so alluring
+-- a blocking variant seems so alluring (e.g. brpoplpush)
 redis.call('lpush', result_key .. '.notify', task.meta.tries)
 redis.call('expire', result_key .. '.notify', 20)
+
+return task.meta.tries
