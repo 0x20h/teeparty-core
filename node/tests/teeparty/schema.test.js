@@ -1,5 +1,5 @@
 var assert = require('assert'),
-    schema = require('./../lib/teeparty-schema')
+    schema = require('./../../lib/teeparty/schema')
 
 describe('schema', function() {
   it('should fail on non-existing schema', function(done) {

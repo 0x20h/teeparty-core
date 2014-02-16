@@ -13,7 +13,7 @@ function validate(schemafile, json, fn) {
 
   var self = this
   events.EventEmitter.call(this)
-  var base = path.resolve([__dirname, '..', '..', 'schema'].join('/'))
+  var base = path.resolve([__dirname, '..', '..', '..', 'schema'].join('/'))
 
   fs.readFile([base, schemafile + '.json'].join('/'), function(err, data) {
     if (err) {
