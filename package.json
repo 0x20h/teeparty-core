@@ -13,7 +13,10 @@
   },
   "keywords": ["json", "schema", "redis", "lua"],
   "dependencies": {
-    "jsonschema": "~0.4"
+    "jayschema": "~0.2"
+  },
+  "devDependencies": {
+    "mocha": "*"
   },
   "engines": {
     "node": ">= 0.8.x"
