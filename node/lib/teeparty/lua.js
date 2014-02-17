@@ -4,18 +4,28 @@ var fs = require('fs'),
     crypto = require('crypto'),
     shasums = {}
 
-module.exports.script = script
-module.exports.sha1 = sha1
-script.prototype.__proto__ = events.EventEmitter.prototype
+module.exports = lua()
+lua.prototype.__proto__ = events.EventEmitter.prototype
 
-function script(file, fn) {
-  if (!(this instanceof script)) {
-      return new script(file, fn)
+function lua() {
+  if (!(this instanceof lua)) {
+      return new lua()
   }
 
-  var self = this
   events.EventEmitter.call(this)
-  var base = path.resolve([__dirname, '..', '..', '..', 'redis'].join('/'))
+}
+
+/**
+ * return the script source.
+ *
+ * @param string file The script file (rel. to redis/ directory)
+ * @param fn callback(script_source)
+ * @return lua
+ */
+
+lua.prototype.script = function(file, fn) {
+  var base = path.resolve([__dirname, '..', '..', '..', 'redis'].join('/')),
+      self = this
 
   fs.readFile([base, file + '.lua'].join('/'), function(err, data) {
     if (err) {
@@ -24,6 +34,8 @@ function script(file, fn) {
         fn(data)
     }
   })
+
+  return this
 }
 
 /**
@@ -32,14 +44,16 @@ function script(file, fn) {
  * @param scriptfile lua script name
  * @param fn callback(sha1sum)
  */
-function sha1(file, fn) {
+lua.prototype.sha1 = function(file, fn) {
   if (shasums[file]) {
-    return fn(shasums[file])
+    fn(shasums[file])
+  } else {
+    this.script(file, function(lua_source) {
+      var h = crypto.createHash('sha1')
+      shasums[file] = h.update(lua_source).digest('hex')
+      fn(shasums[file])
+    })
   }
 
-  script(file, function(lua_source) {
-    var h = crypto.createHash('sha1')
-    shasums[file] = h.update(lua_source).digest('hex')
-    fn(shasums[file])
-  })
+  return this
 }
