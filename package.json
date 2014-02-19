@@ -12,6 +12,7 @@
     "url": "https://github.com/0x20h/teeparty-core.git"
   },
   "keywords": ["json", "schema", "redis", "lua"],
+  "main": "node/lib/index",
   "dependencies": {
     "jayschema": "~0.2"
   },
