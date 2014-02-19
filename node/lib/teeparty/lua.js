@@ -31,7 +31,7 @@ lua.prototype.script = function(file, fn) {
     if (err) {
       self.emit('error', err)
     } else {
-        fn(data)
+        fn(data.toString())
     }
   })
 
